@@ -26,6 +26,19 @@ title(titlename_Lanolin);
 set(gca, 'FontSize', font_size);
 set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');
 
+figure;
+errorbar(Non.Undim(:,2:end), Non.Strain_r_mean, Non.Strain_r_std, 'o-', 'LineWidth', 5, 'MarkerSize', 6, 'CapSize', 8, 'Color', 'b', 'MarkerFaceColor','b');
+hold on;
+errorbar(Teflon.Undim(:,2:end), Teflon.Strain_r_mean, Teflon.Strain_r_std, 'o-', 'LineWidth', 5, 'MarkerSize', 6, 'CapSize', 8, 'Color', 'r', 'MarkerFaceColor','r');
+hold on;
+errorbar(Lanolin.Undim(:,2:end), Lanolin.Strain_r_mean, Lanolin.Strain_r_std, 'o', 'LineWidth', 5, 'MarkerSize', 6, 'CapSize', 8, 'Color', 'm', 'MarkerFaceColor','m');
+hold on;
+xlabel('Undimensional radius [-]'); ylabel('Radial strain [-]');
+legend('Non-lubricated', 'Teflon sheet', 'Lanolin', 'FontSize',font_size);
+set(gca, 'FontSize', font_size);
+set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');
+
+
 function Materials = calc_Result1(Data_Materials, Materials, titlename)
 D0 = mean(Data_Materials.D0, 'omitnan');
 r_n = Data_Materials.r_n;

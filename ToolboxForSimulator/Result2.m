@@ -26,6 +26,17 @@ title(titlename_Lanolin);
 set(gca, 'FontSize', font_size);
 set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');
 
+figure
+errorbar(Non.Dimen, Non.StrainC_mean, Non.StrainC_std, 'o-', 'LineWidth', 5, 'MarkerSize', 6, 'CapSize', 20, 'Color', 'b', 'MarkerFaceColor','b');
+hold on;
+errorbar(Teflon.Dimen, Teflon.StrainC_mean, Teflon.StrainC_std, 'o-', 'LineWidth', 5, 'MarkerSize', 6, 'CapSize', 20, 'Color', 'r', 'MarkerFaceColor','r');
+hold on;
+errorbar(Lanolin.Dimen, Lanolin.StrainC_mean, Lanolin.StrainC_std, 'o-', 'LineWidth', 5, 'MarkerSize', 6, 'CapSize', 20, 'Color', 'm', 'MarkerFaceColor','m');
+xlabel('Dimensionless height [-]'); ylabel('Circumferential strain [-]');
+legend('Non-lubricated', 'Teflon sheet', 'Lanolin', 'FontSize',font_size);
+set(gca, 'FontSize', font_size);
+set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');
+
 function Materials = calc_Result2(Data_Materials, Materials, titlename)
 h0 = mean(Data_Materials.h0, 'omitnan');
 D0 = mean(Data_Materials.D0, 'omitnan');

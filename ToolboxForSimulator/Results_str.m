@@ -42,8 +42,8 @@ loglog(Non.TrueStrain, Non.TrueStress, 'b-o', 'LineWidth',5); hold on;
 loglog(Teflon.TrueStrain, Teflon.TrueStress, 'r-o', 'LineWidth',5); hold on;
 loglog(Lanolin.TrueStrain, Lanolin.TrueStress, 'm-o', 'LineWidth',5)
 legend('Non-lubricated', 'Teflon sheet', 'Lanolin', 'FontSize',font_size);
-xlabel('NominalStrain [-]', 'FontSize',font_size); 
-ylabel('NominalStress [MPa]', 'FontSize',font_size); 
+xlabel('TrueStrain [-]', 'FontSize',font_size); 
+ylabel('TrueStress [MPa]', 'FontSize',font_size); 
 title('true stress-true strain diagram', 'FontSize',font_size)
 set(gca, 'FontSize', font_size);
 set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');

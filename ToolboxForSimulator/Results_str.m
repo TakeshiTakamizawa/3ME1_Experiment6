@@ -1,9 +1,9 @@
-function [Non, Teflon, Lanolin] = Results_str(Data_Non, Data_Teflon, Data_Lanolin, font_size)
-Non = calc_Str(Data_Non);
-Teflon = calc_Str(Data_Teflon);
-Lanolin = calc_Str(Data_Lanolin);
+function [Non, Teflon, Lanolin] = Results_str(Data_Non, Data_Teflon, Data_Lanolin, font_size, titlename_Non , titlename_Teflon, titlename_Lanolin)
+Non = calc_Str(Data_Non, titlename_Non);
+Teflon = calc_Str(Data_Teflon, titlename_Teflon);
+Lanolin = calc_Str(Data_Lanolin, titlename_Lanolin);
 
-function Materials = calc_Str(Data_Materials)
+function Materials = calc_Str(Data_Materials, titlename)
 h0 = mean(Data_Materials.h0, 'omitnan');
 D0 = mean(Data_Materials.D0, 'omitnan');
 P = 9.8066/10^3*Data_Materials.P; % [kgf] → [KN]
@@ -15,6 +15,20 @@ for i = 1:length(L)
     NominalStress(i) = 4*P(i)/(pi*D0)*10^3;
     TrueStress(i) = NominalStress(i)*(1 - NominalStrain(i));
 end
+idx = ~isnan(TrueStrain) & ~isnan(TrueStress);
+TrueStrain = TrueStrain(idx);
+TrueStress = TrueStress(idx);
+log_strain = log(TrueStrain);
+log_stress = log(TrueStress);
+
+coeff = polyfit(log_strain(1:end), log_stress(1:end), 1);  % 線形回帰
+
+n = coeff(1);
+K = exp(coeff(2));
+disp(titlename)
+fprintf('%s 加工硬化指数 n = %.3f\n',titlename , n);
+fprintf('%s 強度係数 K = %.1f MPa\n',titlename, K);
+
 Materials.h0 = h0;
 Materials.D0 = D0;
 Materials.h = h;
@@ -23,6 +37,8 @@ Materials.NominalStress = NominalStress;
 Materials.TrueStrain = TrueStrain;
 Materials.TrueStress = TrueStress;
 Materials.Pmax = max(P);
+Materials.n = n;
+Materials.K = K;
 end
 
 figure
@@ -63,6 +79,28 @@ ylabel('Load [KN]')
 title('maximum load')
 hold off
 box on
+
+figure
+loglog(Non.TrueStrain, Non.TrueStress, 'bo', 'LineWidth',5); hold on;
+loglog(Teflon.TrueStrain, Teflon.TrueStress, 'ro', 'LineWidth',5); hold on;
+loglog(Lanolin.TrueStrain, Lanolin.TrueStress, 'mo', 'LineWidth',5)
+strain_fit = logspace(log10(0.001), log10( max([max(Non.TrueStrain), max(Teflon.TrueStrain), max(Lanolin.TrueStrain)]) ), 100);
+stress_Non = Non.K * strain_fit.^Non.n;
+loglog(strain_fit, stress_Non, 'b-', 'LineWidth', 5);
+stress_Teflon = Teflon.K * strain_fit.^Teflon.n;
+loglog(strain_fit, stress_Teflon, 'r-', 'LineWidth', 5);
+stress_Lanolin = Lanolin.K * strain_fit.^Lanolin.n;
+loglog(strain_fit, stress_Lanolin, 'm-', 'LineWidth', 5);
+xlabel('True Strain');
+ylabel('True Stress [MPa]');
+legend({titlename_Non, titlename_Teflon, titlename_Lanolin, ...
+    ['$\sigma = ' num2str(Non.K,'%.1f') '\varepsilon^{' num2str(Non.n,'%.2f') '}$', ':',titlename_Non], ...
+    ['$\sigma = ' num2str(Teflon.K,'%.1f') '\varepsilon^{' num2str(Teflon.n,'%.2f') '}$', ':',titlename_Teflon], ...
+    ['$\sigma = ' num2str(Lanolin.K,'%.1f') '\varepsilon^{' num2str(Lanolin.n,'%.2f') '}$', ':',titlename_Lanolin]}, ...
+    'Interpreter', 'latex', 'Location', 'best');
+
+set(gca, 'FontSize', font_size);
+set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');
 
 % figure
 % plot(Non.NominalStrain, Non.NominalStress, 'b-o', 'LineWidth',5); hold on;

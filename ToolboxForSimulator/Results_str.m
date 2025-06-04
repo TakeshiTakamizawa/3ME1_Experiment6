@@ -1,9 +1,9 @@
-function [Non, Teflon, Lanolin] = Results_str(Data_Non, Data_Teflon, Data_Lanolin, font_size, titlename_Non , titlename_Teflon, titlename_Lanolin)
-Non = calc_Str(Data_Non, titlename_Non);
-Teflon = calc_Str(Data_Teflon, titlename_Teflon);
-Lanolin = calc_Str(Data_Lanolin, titlename_Lanolin);
+function [Non, Teflon, Lanolin] = Results_str(Data_Non, Data_Teflon, Data_Lanolin, font_size, titlename_Non , titlename_Teflon, titlename_Lanolin, plotnumber)
+Non = calc_Str(Data_Non, titlename_Non, plotnumber);
+Teflon = calc_Str(Data_Teflon, titlename_Teflon, plotnumber);
+Lanolin = calc_Str(Data_Lanolin, titlename_Lanolin, plotnumber);
 
-function Materials = calc_Str(Data_Materials, titlename)
+function Materials = calc_Str(Data_Materials, titlename, plotnumber)
 h0 = mean(Data_Materials.h0, 'omitnan');
 D0 = mean(Data_Materials.D0, 'omitnan');
 P = 9.8066/10^3*Data_Materials.P; % [kgf] → [KN]
@@ -21,7 +21,7 @@ TrueStress = TrueStress(idx);
 log_strain = log(TrueStrain);
 log_stress = log(TrueStress);
 
-coeff = polyfit(log_strain(1:end), log_stress(1:end), 1);  % 線形回帰
+coeff = polyfit(log_strain(plotnumber:end), log_stress(plotnumber:end), 1);  % 線形回帰
 
 n = coeff(1);
 K = exp(coeff(2));
@@ -81,10 +81,10 @@ hold off
 box on
 
 figure
-loglog(Non.TrueStrain, Non.TrueStress, 'bo', 'LineWidth',5); hold on;
-loglog(Teflon.TrueStrain, Teflon.TrueStress, 'ro', 'LineWidth',5); hold on;
-loglog(Lanolin.TrueStrain, Lanolin.TrueStress, 'mo', 'LineWidth',5)
-strain_fit = logspace(log10(0.001), log10( max([max(Non.TrueStrain), max(Teflon.TrueStrain), max(Lanolin.TrueStrain)]) ), 100);
+loglog(Non.TrueStrain, Non.TrueStress, 'bo', 'LineWidth',2, 'MarkerSize',5, 'MarkerFaceColor','b'); hold on;
+loglog(Teflon.TrueStrain, Teflon.TrueStress, 'ro', 'LineWidth',2, 'MarkerSize',5, 'MarkerFaceColor','r'); hold on;
+loglog(Lanolin.TrueStrain, Lanolin.TrueStress, 'mo', 'LineWidth',2, 'MarkerSize',5, 'MarkerFaceColor','m')
+strain_fit = logspace(log10(min([min(Non.TrueStrain(plotnumber)), min(Teflon.TrueStrain(plotnumber)), min(Lanolin.TrueStrain(plotnumber))])), log10( max([max(Non.TrueStrain), max(Teflon.TrueStrain), max(Lanolin.TrueStrain)]) ), 100);
 stress_Non = Non.K * strain_fit.^Non.n;
 loglog(strain_fit, stress_Non, 'b-', 'LineWidth', 5);
 stress_Teflon = Teflon.K * strain_fit.^Teflon.n;
@@ -94,9 +94,9 @@ loglog(strain_fit, stress_Lanolin, 'm-', 'LineWidth', 5);
 xlabel('True Strain');
 ylabel('True Stress [MPa]');
 legend({titlename_Non, titlename_Teflon, titlename_Lanolin, ...
-    ['$\sigma = ' num2str(Non.K,'%.1f') '\varepsilon^{' num2str(Non.n,'%.2f') '}$', ':',titlename_Non], ...
-    ['$\sigma = ' num2str(Teflon.K,'%.1f') '\varepsilon^{' num2str(Teflon.n,'%.2f') '}$', ':',titlename_Teflon], ...
-    ['$\sigma = ' num2str(Lanolin.K,'%.1f') '\varepsilon^{' num2str(Lanolin.n,'%.2f') '}$', ':',titlename_Lanolin]}, ...
+    ['$\sigma = ' num2str(Non.K,'%.1f') '\varepsilon^{' num2str(Non.n,'%.3f') '}$', ':',titlename_Non], ...
+    ['$\sigma = ' num2str(Teflon.K,'%.1f') '\varepsilon^{' num2str(Teflon.n,'%.3f') '}$', ':',titlename_Teflon], ...
+    ['$\sigma = ' num2str(Lanolin.K,'%.1f') '\varepsilon^{' num2str(Lanolin.n,'%.3f') '}$', ':',titlename_Lanolin]}, ...
     'Interpreter', 'latex', 'Location', 'best');
 
 set(gca, 'FontSize', font_size);

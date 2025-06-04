@@ -3,7 +3,7 @@ clc; close all; clear;
 %% setting condition
 addpath(genpath('ToolboxForSimulator'));
 Data_Non     = readtable('Data_Non.xlsx');
-Data_Teflon     = readtable('Data_Teflon.xlsx');
+Data_Teflon     = readtable('Data_Teflon_extra.xlsx');
 Data_Lanolin     = readtable('Data_Lanolin.xlsx');
 font_size = 20;
 titlename_Non = 'Non-lubricated';

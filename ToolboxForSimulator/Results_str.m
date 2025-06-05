@@ -43,9 +43,9 @@ end
 
 figure
 subplot(1,3,1)
-plot(Non.NominalStrain, Non.NominalStress, 'b-o', 'LineWidth',5); hold on;
-plot(Teflon.NominalStrain, Teflon.NominalStress, 'r-o', 'LineWidth',5); hold on;
-plot(Lanolin.NominalStrain, Lanolin.NominalStress, 'm-o', 'LineWidth',5)
+plot(Non.NominalStrain, Non.NominalStress, 'bo', 'LineWidth',5); hold on;
+plot(Teflon.NominalStrain, Teflon.NominalStress, 'ro', 'LineWidth',5); hold on;
+plot(Lanolin.NominalStrain, Lanolin.NominalStress, 'mo', 'LineWidth',5)
 legend('Non-lubricated', 'Teflon sheet', 'Lanolin', 'FontSize',font_size);
 xlabel('NominalStrain [-]', 'FontSize',font_size); 
 ylabel('NominalStress [MPa]', 'FontSize',font_size); 
@@ -54,9 +54,9 @@ set(gca, 'FontSize', font_size);
 set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');
 
 subplot(1,3,2)
-loglog(Non.TrueStrain, Non.TrueStress, 'b-o', 'LineWidth',5); hold on;
-loglog(Teflon.TrueStrain, Teflon.TrueStress, 'r-o', 'LineWidth',5); hold on;
-loglog(Lanolin.TrueStrain, Lanolin.TrueStress, 'm-o', 'LineWidth',5)
+plot(Non.TrueStrain, Non.TrueStress, 'bo', 'LineWidth',5); hold on;
+plot(Teflon.TrueStrain, Teflon.TrueStress, 'ro', 'LineWidth',5); hold on;
+plot(Lanolin.TrueStrain, Lanolin.TrueStress, 'mo', 'LineWidth',5)
 legend('Non-lubricated', 'Teflon sheet', 'Lanolin', 'FontSize',font_size);
 xlabel('TrueStrain [-]', 'FontSize',font_size); 
 ylabel('TrueStress [MPa]', 'FontSize',font_size); 
@@ -79,6 +79,18 @@ ylabel('Load [KN]')
 title('maximum load')
 hold off
 box on
+
+figure
+
+loglog(Non.TrueStrain, Non.TrueStress, 'bo', 'LineWidth',5); hold on;
+loglog(Teflon.TrueStrain, Teflon.TrueStress, 'ro', 'LineWidth',5); hold on;
+loglog(Lanolin.TrueStrain, Lanolin.TrueStress, 'mo', 'LineWidth',5)
+legend('Non-lubricated', 'Teflon sheet', 'Lanolin', 'FontSize',font_size);
+xlabel('TrueStrain [-]', 'FontSize',font_size); 
+ylabel('TrueStress [MPa]', 'FontSize',font_size); 
+title('true stress-true strain diagram', 'FontSize',font_size)
+set(gca, 'FontSize', font_size);
+set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');
 
 figure
 loglog(Non.TrueStrain, Non.TrueStress, 'bo', 'LineWidth',2, 'MarkerSize',5, 'MarkerFaceColor','b'); hold on;

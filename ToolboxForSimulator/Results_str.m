@@ -46,10 +46,11 @@ subplot(1,3,1)
 plot(Non.NominalStrain, Non.NominalStress, 'bo', 'LineWidth',5); hold on;
 plot(Teflon.NominalStrain, Teflon.NominalStress, 'ro', 'LineWidth',5); hold on;
 plot(Lanolin.NominalStrain, Lanolin.NominalStress, 'ko', 'LineWidth',5)
-legend('Non-lubricated', 'Teflon sheet', 'Lanolin', 'FontSize',font_size);
+legend('Non-lubricated', 'Teflon sheet', 'Lanolin', 'Interpreter', 'latex', 'FontSize',font_size);
 xlabel('NominalStrain $\varepsilon$ [-]', 'Interpreter', 'latex','FontSize' ,font_size); 
 ylabel('NominalStress $\sigma$ [MPa]', 'Interpreter', 'latex', 'FontSize',font_size); 
-title('nominal stress-nominal strain diagram', 'FontSize',font_size)
+title('nominal stress-nominal strain diagram', 'Interpreter', 'latex', 'FontSize',font_size)
+axis([-0.1 0.8 0 230]);
 set(gca, 'FontSize', font_size);
 set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');
 
@@ -57,28 +58,48 @@ subplot(1,3,2)
 plot(Non.TrueStrain, Non.TrueStress, 'bo', 'LineWidth',5); hold on;
 plot(Teflon.TrueStrain, Teflon.TrueStress, 'ro', 'LineWidth',5); hold on;
 plot(Lanolin.TrueStrain, Lanolin.TrueStress, 'ko', 'LineWidth',5)
-legend('Non-lubricated', 'Teflon sheet', 'Lanolin', 'FontSize',font_size);
+legend('Non-lubricated', 'Teflon sheet', 'Lanolin', 'Interpreter', 'latex', 'FontSize',font_size);
 xlabel('TrueStrain $\varepsilon_{\mathrm{t}}$ [-]', 'Interpreter', 'latex', 'FontSize',font_size); 
 ylabel('TrueStress $\sigma_{\mathrm{t}}$ [MPa]', 'Interpreter', 'latex', 'FontSize',font_size); 
-title('true stress-true strain diagram', 'FontSize',font_size)
+title('true stress-true strain diagram', 'Interpreter', 'latex', 'FontSize',font_size)
+axis([-0.1 0.8 0 230]);
 set(gca, 'FontSize', font_size);
 set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');
 
 subplot(1,3,3)
 P_max = [Non.Pmax, Teflon.Pmax, Lanolin.Pmax];
-X = categorical({'Non-lubricated', 'Teflon sheet', 'Lanolin'});
-X = reordercats(X,{'Non-lubricated', 'Teflon sheet', 'Lanolin'});
-hold on
+x = 1:3;
 colors = {'b', 'r', 'k'};
+hold on
 for i = 1:length(P_max)
-    bar(X(i), P_max(i), 'FaceColor', colors{i});
+    bar(x(i), P_max(i), 'FaceColor', colors{i});
 end
+xticks(x)
+xticklabels({'$\mathrm{Non\!-\!lubricated}$', '$\mathrm{Teflon\ sheet}$', '$\mathrm{Lanolin}$'})
+set(gca, 'TickLabelInterpreter', 'latex')
+ylabel('Load $P_{\mathrm{max}}$ [KN]', 'Interpreter', 'latex')
+title('maximum load', 'Interpreter', 'latex')
 set(gca, 'FontSize', font_size);
 set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');
-ylabel('Load $P_{\mathrm{max}}$ [KN]', 'Interpreter', 'latex')
-title('maximum load')
 hold off
 box on
+
+% subplot(1,3,3)
+% P_max = [Non.Pmax, Teflon.Pmax, Lanolin.Pmax];
+% X = categorical({'Non-lubricated', 'Teflon sheet', 'Lanolin'});
+% X = reordercats(X,{'Non-lubricated', 'Teflon sheet', 'Lanolin'});
+% hold on
+% colors = {'b', 'r', 'k'};
+% for i = 1:length(P_max)
+%     bar(X(i), P_max(i), 'FaceColor', colors{i});
+% end
+% set(gca, 'FontSize', font_size);
+% set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');
+% 
+% ylabel('Load $P_{\mathrm{max}}$ [KN]', 'Interpreter', 'latex')
+% title('maximum load', 'Interpreter', 'latex')
+% hold off
+% box on
 
 figure
 
@@ -86,9 +107,10 @@ loglog(Non.TrueStrain, Non.TrueStress, 'bo', 'LineWidth',5); hold on;
 loglog(Teflon.TrueStrain, Teflon.TrueStress, 'ro', 'LineWidth',5); hold on;
 loglog(Lanolin.TrueStrain, Lanolin.TrueStress, 'ko', 'LineWidth',5)
 legend('Non-lubricated', 'Teflon sheet', 'Lanolin', 'FontSize',font_size);
-xlabel('TrueStrain [-]', 'FontSize',font_size); 
-ylabel('TrueStress [MPa]', 'FontSize',font_size); 
+xlabel('TrueStrain $\varepsilon$ [-]', 'Interpreter', 'latex', 'FontSize',font_size); 
+ylabel('TrueStress $\sigma_{\mathrm{t}}$ [MPa]', 'Interpreter', 'latex', 'FontSize',font_size); 
 title('true stress-true strain diagram', 'FontSize',font_size)
+
 set(gca, 'FontSize', font_size);
 set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');
 
@@ -103,8 +125,8 @@ stress_Teflon = Teflon.K * strain_fit.^Teflon.n;
 loglog(strain_fit, stress_Teflon, 'r-', 'LineWidth', 5);
 stress_Lanolin = Lanolin.K * strain_fit.^Lanolin.n;
 loglog(strain_fit, stress_Lanolin, 'k-', 'LineWidth', 5);
-xlabel('True Strain');
-ylabel('True Stress [MPa]');
+xlabel('True Strain $\varepsilon$ [-]', 'Interpreter', 'latex');
+ylabel('True Stress $\sigma_{\mathrm{t}}$ [MPa]', 'Interpreter', 'latex');
 legend({titlename_Non, titlename_Teflon, titlename_Lanolin, ...
     ['$\sigma = ' num2str(Non.K,'%.1f') '\varepsilon^{' num2str(Non.n,'%.3f') '}$', ':',titlename_Non], ...
     ['$\sigma = ' num2str(Teflon.K,'%.1f') '\varepsilon^{' num2str(Teflon.n,'%.3f') '}$', ':',titlename_Teflon], ...

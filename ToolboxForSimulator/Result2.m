@@ -33,7 +33,7 @@ errorbar(Teflon.Dimen, Teflon.StrainC_mean, Teflon.StrainC_std, 'o', 'LineWidth'
 hold on;
 errorbar(Lanolin.Dimen, Lanolin.StrainC_mean, Lanolin.StrainC_std, 'o', 'LineWidth', 2, 'MarkerSize', 6, 'CapSize', 10, 'Color', 'k', 'MarkerFaceColor','k');
 axis(-0.5, 0.5, 0.32, 0.45)
-xlabel('Normarized height [-]'); ylabel('Circumferential strain $\varepsilon_{\mathrm{c}}$ [-]', 'Interpreter', 'latex');
+xlabel('Normarized height [-]', 'Interpreter', 'latex'); ylabel('Circumferential strain $\varepsilon_{\mathrm{c}}$ [-]', 'Interpreter', 'latex');
 legend('Non-lubricated', 'Teflon sheet', 'Lanolin', 'Interpreter', 'latex', 'FontSize',font_size);
 set(gca, 'FontSize', font_size);
 set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');

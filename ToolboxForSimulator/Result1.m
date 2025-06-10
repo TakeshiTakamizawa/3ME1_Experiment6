@@ -4,37 +4,37 @@ Non = calc_Result1(Data_Non, Non, titlename_Non);
 Teflon = calc_Result1(Data_Teflon, Teflon, titlename_Teflon);
 Lanolin = calc_Result1(Data_Lanolin, Lanolin, titlename_Lanolin);
 
+% figure;
+% subplot(1,3,1)
+% errorbar(Non.Undim(:,2:end), Non.Strain_r_mean, Non.Strain_r_std, 'o', 'LineWidth', 1.5, 'MarkerSize', 6, 'CapSize', 8, 'Color', 'b', 'MarkerFaceColor','b');
+% xlabel('Undimensional radius [-]', 'Interpreter', 'latex'); ylabel('Radial strain $\varepsilon$ [-]', 'Interpreter', 'latex');
+% title(titlename_Non, 'Interpreter', 'latex');
+% set(gca, 'FontSize', font_size);
+% set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');
+% 
+% subplot(1,3,2)
+% errorbar(Teflon.Undim(:,2:end), Teflon.Strain_r_mean, Teflon.Strain_r_std, 'o', 'LineWidth', 1.5, 'MarkerSize', 6, 'CapSize', 8, 'Color', 'r', 'MarkerFaceColor','r');
+% xlabel('Undimensional radius [-]', 'Interpreter', 'latex'); ylabel('Radial strain $\varepsilon$ [-]', 'Interpreter', 'latex');
+% title(titlename_Teflon, 'Interpreter', 'latex');
+% set(gca, 'FontSize', font_size);
+% set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');
+% 
+% subplot(1,3,3)
+% errorbar(Lanolin.Undim(:,2:end), Lanolin.Strain_r_mean, Lanolin.Strain_r_std, 'o', 'LineWidth', 1.5, 'MarkerSize', 6, 'CapSize', 8, 'Color', 'k', 'MarkerFaceColor','k');
+% xlabel('Undimensional radius [-]', 'Interpreter', 'latex'); ylabel('Radial strain $\varepsilon$ [-]', 'Interpreter', 'latex');
+% title(titlename_Lanolin, 'Interpreter', 'latex');
+% set(gca, 'FontSize', font_size);
+% set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');
+
 figure;
-subplot(1,3,1)
-errorbar(Non.Undim(:,2:end), Non.Strain_r_mean, Non.Strain_r_std, 'o', 'LineWidth', 1.5, 'MarkerSize', 6, 'CapSize', 8, 'Color', 'b', 'MarkerFaceColor','b');
-xlabel('Undimensional radius [-]'); ylabel('Radial strain [-]');
-title(titlename_Non);
-set(gca, 'FontSize', font_size);
-set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');
-
-subplot(1,3,2)
-errorbar(Teflon.Undim(:,2:end), Teflon.Strain_r_mean, Teflon.Strain_r_std, 'o', 'LineWidth', 1.5, 'MarkerSize', 6, 'CapSize', 8, 'Color', 'r', 'MarkerFaceColor','r');
-xlabel('Undimensional radius [-]'); ylabel('Radial strain [-]');
-title(titlename_Teflon);
-set(gca, 'FontSize', font_size);
-set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');
-
-subplot(1,3,3)
-errorbar(Lanolin.Undim(:,2:end), Lanolin.Strain_r_mean, Lanolin.Strain_r_std, 'o', 'LineWidth', 1.5, 'MarkerSize', 6, 'CapSize', 8, 'Color', 'm', 'MarkerFaceColor','m');
-xlabel('Undimensional radius [-]'); ylabel('Radial strain [-]');
-title(titlename_Lanolin);
-set(gca, 'FontSize', font_size);
-set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');
-
-figure;
-errorbar(Non.Undim(:,2:end), Non.Strain_r_mean, Non.Strain_r_std, 'o', 'LineWidth', 5, 'MarkerSize', 6, 'CapSize', 8, 'Color', 'b', 'MarkerFaceColor','b');
+errorbar(Non.Undim(:,2:end), Non.Strain_r_mean, Non.Strain_r_std, 'o', 'LineWidth', 2, 'MarkerSize', 6, 'CapSize', 10, 'Color', 'b', 'MarkerFaceColor','b');
 hold on;
-errorbar(Teflon.Undim(:,2:end), Teflon.Strain_r_mean, Teflon.Strain_r_std, 'o', 'LineWidth', 5, 'MarkerSize', 6, 'CapSize', 8, 'Color', 'r', 'MarkerFaceColor','r');
+errorbar(Teflon.Undim(:,2:end), Teflon.Strain_r_mean, Teflon.Strain_r_std, 'o', 'LineWidth', 2, 'MarkerSize', 6, 'CapSize', 10, 'Color', 'r', 'MarkerFaceColor','r');
 hold on;
-errorbar(Lanolin.Undim(:,2:end), Lanolin.Strain_r_mean, Lanolin.Strain_r_std, 'o', 'LineWidth', 5, 'MarkerSize', 6, 'CapSize', 8, 'Color', 'm', 'MarkerFaceColor','m');
+errorbar(Lanolin.Undim(:,2:end), Lanolin.Strain_r_mean, Lanolin.Strain_r_std, 'o', 'LineWidth', 2, 'MarkerSize', 6, 'CapSize', 10, 'Color', 'k', 'MarkerFaceColor','k');
 hold on;
-xlabel('Undimensional radius [-]'); ylabel('Radial strain [-]');
-legend('Non-lubricated', 'Teflon sheet', 'Lanolin', 'FontSize',font_size);
+xlabel('Normarized radius [-]', 'Interpreter', 'latex'); ylabel('Radial strain $\varepsilon_{\mathrm{r}}$ [-]', 'Interpreter', 'latex');
+legend('Non-lubricated', 'Teflon sheet', 'Lanolin', 'Interpreter', 'latex', 'FontSize',font_size);
 set(gca, 'FontSize', font_size);
 set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');
 

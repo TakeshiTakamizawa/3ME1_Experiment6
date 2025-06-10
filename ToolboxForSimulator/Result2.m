@@ -4,36 +4,37 @@ Non = calc_Result2(Data_Non, Non, titlename_Non);
 Teflon = calc_Result2(Data_Teflon, Teflon, titlename_Teflon);
 Lanolin = calc_Result2(Data_Lanolin, Lanolin, titlename_Lanolin);
 
-figure;
-subplot(1,3,1)
-errorbar(Non.Dimen, Non.StrainC_mean, Non.StrainC_std, 'o', 'LineWidth', 1.5, 'MarkerSize', 6, 'CapSize', 8, 'Color', 'b', 'MarkerFaceColor','b');
-xlabel('Dimensionless height [-]'); ylabel('Circumferential strain [-]');
-title(titlename_Non);
-set(gca, 'FontSize', font_size);
-set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');
-
-subplot(1,3,2)
-errorbar(Teflon.Dimen, Teflon.StrainC_mean, Teflon.StrainC_std, 'o', 'LineWidth', 1.5, 'MarkerSize', 6, 'CapSize', 8, 'Color', 'r', 'MarkerFaceColor','r');
-xlabel('Dimensionless height [-]'); ylabel('Circumferential strain [-]');
-title(titlename_Teflon);
-set(gca, 'FontSize', font_size);
-set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');
-
-subplot(1,3,3)
-errorbar(Lanolin.Dimen, Lanolin.StrainC_mean, Lanolin.StrainC_std, 'o', 'LineWidth', 1.5, 'MarkerSize', 6, 'CapSize', 8, 'Color', 'm', 'MarkerFaceColor','m');
-xlabel('Dimensionless height [-]'); ylabel('Circumferential strain [-]');
-title(titlename_Lanolin);
-set(gca, 'FontSize', font_size);
-set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');
+% figure;
+% subplot(1,3,1)
+% errorbar(Non.Dimen, Non.StrainC_mean, Non.StrainC_std, 'o', 'LineWidth', 1.5, 'MarkerSize', 6, 'CapSize', 8, 'Color', 'b', 'MarkerFaceColor','b');
+% xlabel('Dimensionless height [-]'); ylabel('Circumferential strain [-]');
+% title(titlename_Non);
+% set(gca, 'FontSize', font_size);
+% set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');
+% 
+% subplot(1,3,2)
+% errorbar(Teflon.Dimen, Teflon.StrainC_mean, Teflon.StrainC_std, 'o', 'LineWidth', 1.5, 'MarkerSize', 6, 'CapSize', 8, 'Color', 'r', 'MarkerFaceColor','r');
+% xlabel('Dimensionless height [-]'); ylabel('Circumferential strain [-]');
+% title(titlename_Teflon);
+% set(gca, 'FontSize', font_size);
+% set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');
+% 
+% subplot(1,3,3)
+% errorbar(Lanolin.Dimen, Lanolin.StrainC_mean, Lanolin.StrainC_std, 'o', 'LineWidth', 1.5, 'MarkerSize', 6, 'CapSize', 8, 'Color', 'k', 'MarkerFaceColor','k');
+% xlabel('Dimensionless height [-]'); ylabel('Circumferential strain [-]');
+% title(titlename_Lanolin);
+% set(gca, 'FontSize', font_size);
+% set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');
 
 figure
-errorbar(Non.Dimen, Non.StrainC_mean, Non.StrainC_std, 'o', 'LineWidth', 5, 'MarkerSize', 6, 'CapSize', 20, 'Color', 'b', 'MarkerFaceColor','b');
+errorbar(Non.Dimen, Non.StrainC_mean, Non.StrainC_std, 'o', 'LineWidth', 2, 'MarkerSize', 6, 'CapSize', 10, 'Color', 'b', 'MarkerFaceColor','b');
 hold on;
-errorbar(Teflon.Dimen, Teflon.StrainC_mean, Teflon.StrainC_std, 'o', 'LineWidth', 5, 'MarkerSize', 6, 'CapSize', 20, 'Color', 'r', 'MarkerFaceColor','r');
+errorbar(Teflon.Dimen, Teflon.StrainC_mean, Teflon.StrainC_std, 'o', 'LineWidth', 2, 'MarkerSize', 6, 'CapSize', 10, 'Color', 'r', 'MarkerFaceColor','r');
 hold on;
-errorbar(Lanolin.Dimen, Lanolin.StrainC_mean, Lanolin.StrainC_std, 'o', 'LineWidth', 5, 'MarkerSize', 6, 'CapSize', 20, 'Color', 'm', 'MarkerFaceColor','m');
-xlabel('Dimensionless height [-]'); ylabel('Circumferential strain [-]');
-legend('Non-lubricated', 'Teflon sheet', 'Lanolin', 'FontSize',font_size);
+errorbar(Lanolin.Dimen, Lanolin.StrainC_mean, Lanolin.StrainC_std, 'o', 'LineWidth', 2, 'MarkerSize', 6, 'CapSize', 10, 'Color', 'k', 'MarkerFaceColor','k');
+axis(-0.5, 0.5, 0.32, 0.45)
+xlabel('Normarized height [-]'); ylabel('Circumferential strain $\varepsilon_{\mathrm{c}}$ [-]', 'Interpreter', 'latex');
+legend('Non-lubricated', 'Teflon sheet', 'Lanolin', 'Interpreter', 'latex', 'FontSize',font_size);
 set(gca, 'FontSize', font_size);
 set(gca, 'TickLength', [0.03 0.03], 'XMinorTick', 'on', 'YMinorTick', 'on');
 
